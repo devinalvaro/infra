@@ -1,5 +1,13 @@
 #!/bin/sh
 
+user="${1-none}"
+password="${2-none}"
+
+if [ "${user}" == "none" ] || [ "${password}" == "none" ]; then
+    echo "==> Need user and password"
+    exit
+fi
+
 echo "==> Creating user"
 useradd -m -r -p $(openssl passwd $password) -s $SHELL $user
 
