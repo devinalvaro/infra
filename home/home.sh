@@ -37,6 +37,17 @@ sudo apt-get install -qq \
 
 # ...
 
+# home
+HOME_REPO="git@gitlab.com:devinalvaro/home.git"
+HOME_DIR="${HOME}/$(basename ${HOME_REPO})"
+if [ ! -d "${HOME}/.git" ]; then
+    git clone "${HOME_REPO}" "${HOME_DIR}"
+    cp -rp "${HOME_DIR}/.[^.]*" .
+    rm -rf home
+fi
+
+# ...
+
 # docker
 
 if [ "$(groups ${USER} | grep -q docker)" ]; then
