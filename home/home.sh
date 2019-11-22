@@ -4,9 +4,9 @@ set -eu
 
 export DEBIAN_FRONTEND=noninteractive
 
-UPGRADE_PACKAGES="${1}"
+upgrade_packages="${1}"
 
-if [ "${UPGRADE_PACKAGES}" == "upgrade" ]; then
+if [ "${upgrade_packages}" == "upgrade" ]; then
     echo "==> Updating and upgrading packages"
     sudo apt-get update
     sudo apt-get upgrade -y
@@ -38,11 +38,11 @@ sudo apt-get install -qq \
 # ...
 
 # home
-HOME_REPO="git@gitlab.com:devinalvaro/home.git"
-HOME_DIR="${HOME}/$(basename ${HOME_REPO})"
+home_repo="git@gitlab.com:devinalvaro/home.git"
+home_dir="${HOME}/$(basename ${home_repo})"
 if [ ! -d "${HOME}/.git" ]; then
-    git clone "${HOME_REPO}" "${HOME_DIR}"
-    cp -rp "${HOME_DIR}/.[^.]*" .
+    git clone "${home_repo}" "${home_dir}"
+    cp -rp "${home_dir}/.[^.]*" .
     rm -rf home
 fi
 
@@ -57,18 +57,18 @@ fi
 
 # fd
 
-FD_BIN="/usr/local/bin/fd"
-if [ ! -f "${FD_BIN}" ]; then
+fd_bin="/usr/local/bin/fd"
+if [ ! -f "${fd_bin}" ]; then
     echo "==> Linking fdfind to fd"
-    sudo ln -sfn "$(which fdfind)" "${FD_BIN}"
+    sudo ln -sfn "$(which fdfind)" "${fd_bin}"
 fi
 
 # fish
 
-FISHER_FILE="${HOME}/.config/fish/functions/fisher.fish"
-if [ ! -f "${FISHER_FILE}" ]; then
+fisher_file="${HOME}/.config/fish/functions/fisher.fish"
+if [ ! -f "${fisher_file}" ]; then
     echo " ==> Installing fish plugins"
-    curl https://git.io/fisher --create-dirs -sLo "${FISHER_FILE}"
+    curl https://git.io/fisher --create-dirs -sLo "${fisher_file}"
     fish -c fisher
 fi
 
@@ -77,17 +77,17 @@ chsh -s "$(which fish)"
 
 # nvim
 
-VIM_PLUG_FILE="${HOME}/.local/share/nvim/site/autoload/plug.vim"
-if [ ! -f "${VIM_PLUG_FILE}" ]; then
+vim_plug_file="${HOME}/.local/share/nvim/site/autoload/plug.vim"
+if [ ! -f "${vim_plug_file}" ]; then
     echo " ==> Installing nvim plugins"
-    curl -fLo "${VIM_PLUG_FILE}" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -fLo "${vim_plug_file}" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     nvim +PlugInstall +qall
 fi
 
-NVIM_FTPLUGIN="${HOME}/.local/share/nvim/site/ftplugin"
-if [ ! -d "${NVIM_FTPLUGIN}" ]; then
+nvim_ftplugin="${HOME}/.local/share/nvim/site/ftplugin"
+if [ ! -d "${nvim_ftplugin}" ]; then
     echo "==> Linking nvim/langs to nvim/site/ftplugin"
-    ln -sfn "${HOME}/.config/nvim/langs" "${NVIM_FTPLUGIN}"
+    ln -sfn "${HOME}/.config/nvim/langs" "${nvim_ftplugin}"
 fi
 
 # pip

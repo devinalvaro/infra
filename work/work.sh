@@ -4,9 +4,9 @@ set -eu
 
 export DEBIAN_FRONTEND=noninteractive
 
-UPGRADE_PACKAGES="${1}"
+upgrade_packages="${1}"
 
-if [ "${UPGRADE_PACKAGES}" == "upgrade" ]; then
+if [ "${upgrade_packages}" == "upgrade" ]; then
     echo "==> Updating and upgrading packages"
     sudo apt-get update
     sudo apt-get upgrade -y
