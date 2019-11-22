@@ -4,7 +4,7 @@ set -eu
 
 export DEBIAN_FRONTEND=noninteractive
 
-UPGRADE_PACKAGES=${1:-none}
+UPGRADE_PACKAGES="${1:-none}"
 
 if [ "${UPGRADE_PACKAGES}" != "none" ]; then
     echo "==> Updating and upgrading packages"
@@ -41,7 +41,7 @@ sudo apt-get install -qq \
 
 if [ "$(groups ${USER} | grep -q docker)" ]; then
     echo "==> Adding user to docker group"
-    sudo gpasswd -a ${USER} docker
+    sudo gpasswd -a "${USER}" docker
 fi
 
 # fd
@@ -49,7 +49,7 @@ fi
 FD_BIN="/usr/local/bin/fd"
 if [ ! -f "${FD_BIN}" ]; then
     echo "==> Linking fdfind to fd"
-    sudo ln -sfn "$(which fdfind)" ${FD_BIN}
+    sudo ln -sfn "$(which fdfind)" "${FD_BIN}"
 fi
 
 # fish
@@ -57,7 +57,7 @@ fi
 FISHER_FILE="${HOME}/.config/fish/functions/fisher.fish"
 if [ ! -f "${FISHER_FILE}" ]; then
     echo " ==> Installing fish plugins"
-    curl https://git.io/fisher --create-dirs -sLo ${FISHER_FILE}
+    curl https://git.io/fisher --create-dirs -sLo "${FISHER_FILE}"
     fish -c fisher
 fi
 
@@ -69,14 +69,14 @@ chsh -s "$(which fish)"
 VIM_PLUG_FILE="${HOME}/.local/share/nvim/site/autoload/plug.vim"
 if [ ! -f "${VIM_PLUG_FILE}" ]; then
     echo " ==> Installing nvim plugins"
-    curl -fLo ${VIM_PLUG_FILE} --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -fLo "${VIM_PLUG_FILE}" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     nvim +PlugInstall +qall
 fi
 
 NVIM_FTPLUGIN="${HOME}/.local/share/nvim/site/ftplugin"
 if [ ! -d "${NVIM_FTPLUGIN}" ]; then
     echo "==> Linking nvim/langs to nvim/site/ftplugin"
-    ln -sfn "${HOME}/.config/nvim/langs" ${NVIM_FTPLUGIN}
+    ln -sfn "${HOME}/.config/nvim/langs" "${NVIM_FTPLUGIN}"
 fi
 
 # pip
