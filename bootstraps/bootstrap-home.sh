@@ -23,6 +23,7 @@ sudo apt-get install -qq \
     fzf \
     git \
     golang \
+    htop \
     neovim \
     nodejs \
     npm \
