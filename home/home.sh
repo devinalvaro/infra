@@ -11,6 +11,10 @@ if [ "${password}" != "none" ]; then
     sudo="echo ${password} | sudo -S"
 fi
 
+# ...
+
+# apt
+
 echo "==> Updating and installing packages"
 eval "${sudo}" apt-get update && eval "${sudo}" apt-get install -qq \
     build-essential \
@@ -34,8 +38,6 @@ eval "${sudo}" apt-get update && eval "${sudo}" apt-get install -qq \
     wget \
     --no-install-recommends
 
-# ...
-
 # home
 
 home_repo="https://gitlab.com/devinalvaro/home.git"
@@ -47,8 +49,6 @@ if [ ! -d "${HOME}/.git" ]; then
     cp -rp "${home_dir}"/.[^.]* ${HOME}
     rm -rf "${home_dir}"
 fi
-
-# ...
 
 # docker
 

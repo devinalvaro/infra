@@ -11,6 +11,10 @@ if [ "${password}" != "none" ]; then
     sudo="echo ${password} | sudo -S"
 fi
 
+# ...
+
+# apt
+
 echo "==> Updating and installing packages"
 "${sudo}" apt-get update && "${sudo}" apt-get install -qq \
     pkg-config \
