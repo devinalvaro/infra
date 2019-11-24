@@ -1,12 +1,10 @@
-# digitalocean_token = ""
+digitalocean_token = ""
 
 droplet_name   = "home"
 droplet_image  = "ubuntu-19-10-x64"
 droplet_region = "sgp1"
 droplet_size   = "s-1vcpu-1gb"
 
-# ssh_key_name         = ""
-ssh_private_key_path = "~/.ssh/id_rsa"
+ssh_key_name         = ""
 
-# user     = ""
-# password = ""
+user = ""
