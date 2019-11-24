@@ -4,7 +4,7 @@ user="${1-none}"
 password="${2-none}"
 
 if [ "${user}" == "none" ] || [ "${password}" == "none" ]; then
-    echo "==> Need user and password"
+    echo "Usage: $(basename $0) <user> <password>"
     exit
 fi
 

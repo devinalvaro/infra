@@ -38,12 +38,14 @@ sudo apt-get install -qq \
 # ...
 
 # home
+
 home_repo="git@gitlab.com:devinalvaro/home.git"
 home_dir="${HOME}/$(basename ${home_repo})"
 if [ ! -d "${HOME}/.git" ]; then
+    echo "==> Cloning home repository"
     git clone "${home_repo}" "${home_dir}"
-    cp -rp "${home_dir}/.[^.]*" .
-    rm -rf home
+    cp -rp "${home_dir}/.[^.]*" ${HOME}
+    rm -rf "${home_dir}"
 fi
 
 # ...
@@ -72,8 +74,10 @@ if [ ! -f "${fisher_file}" ]; then
     fish -c fisher
 fi
 
-echo " ==> Setting fish as the default shell"
-chsh -s "$(which fish)"
+if [ $SHELL != "$(which fish)" ]; then
+    echo " ==> Setting fish as the default shell"
+    sudo chsh -s "$(which fish)" "${USER}"
+fi
 
 # nvim
 
