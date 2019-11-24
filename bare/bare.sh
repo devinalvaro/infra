@@ -13,7 +13,7 @@ if [ ! "$(id -u ${user} 2> /dev/null)" ]; then
     useradd -m -r -p $(openssl passwd $password) -s $SHELL $user
 fi
 
-if [ "$(groups ${user} | grep -q sudo)" ]; then
+if [ ! "$(groups ${user} | grep -w sudo 2> /dev/null)" ]; then
     echo "==> Adding user to sudo"
     usermod -aG sudo $user
 fi

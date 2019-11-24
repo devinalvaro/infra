@@ -52,7 +52,7 @@ fi
 
 # docker
 
-if [ "$(groups ${USER} | grep -q docker)" ]; then
+if [ ! "$(groups ${USER} | grep -w docker 2> /dev/null)" ]; then
     echo "==> Adding user to docker group"
     "${sudo}" gpasswd -a "${USER}" docker
 fi
