@@ -44,7 +44,7 @@ home_dir="${HOME}/$(basename ${home_repo})"
 if [ ! -d "${HOME}/.git" ]; then
     echo "==> Cloning home repository"
     git clone "${home_repo}" "${home_dir}"
-    cp -rp "${home_dir}/.[^.]*" ${HOME}
+    cp -rp "${home_dir}/.[^.]"* ${HOME}
     rm -rf "${home_dir}"
 fi
 
