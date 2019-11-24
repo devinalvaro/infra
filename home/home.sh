@@ -85,7 +85,7 @@ vim_plug_file="${HOME}/.local/share/nvim/site/autoload/plug.vim"
 if [ ! -f "${vim_plug_file}" ]; then
     echo " ==> Installing nvim plugins"
     curl -fLo "${vim_plug_file}" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    nvim +PlugInstall +qall
+    nvim +'PlugInstall --sync' +qall
 fi
 
 nvim_ftplugin="${HOME}/.local/share/nvim/site/ftplugin"
