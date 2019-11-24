@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 user="${1-none}"
 password="${2-none}"
