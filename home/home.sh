@@ -9,10 +9,11 @@ password="${1-none}"
 sudo="sudo"
 if [ "${password}" != "none" ]; then
     sudo="echo ${password} | sudo -S"
+    sudo="eval $sudo"
 fi
 
 echo "==> Updating and installing packages"
-"${sudo}" apt-get update && "${sudo}" apt-get install -qq \
+eval "${sudo}" apt-get update && eval "${sudo}" apt-get install -qq \
     build-essential \
     curl \
     docker-compose \
@@ -54,7 +55,7 @@ fi
 
 if [ ! "$(groups ${USER} | grep -w docker 2> /dev/null)" ]; then
     echo "==> Adding user to docker group"
-    "${sudo}" gpasswd -a "${USER}" docker
+    eval "${sudo}" gpasswd -a "${USER}" docker
 fi
 
 # fd
@@ -62,7 +63,7 @@ fi
 fd_bin="/usr/local/bin/fd"
 if [ ! -f "${fd_bin}" ]; then
     echo "==> Linking fdfind to fd"
-    "${sudo}" ln -sfn "$(which fdfind)" "${fd_bin}"
+    eval "${sudo}" ln -sfn "$(which fdfind)" "${fd_bin}"
 fi
 
 # fish
@@ -76,7 +77,7 @@ fi
 
 if [ $SHELL != "$(which fish)" ]; then
     echo " ==> Setting fish as the default shell"
-    "${sudo}" chsh -s "$(which fish)" "${USER}"
+    eval "${sudo}" chsh -s "$(which fish)" "${USER}"
 fi
 
 # nvim
