@@ -17,25 +17,26 @@ fi
 
 echo "==> Updating and installing packages"
 eval "${sudo}" apt-get update && eval "${sudo}" apt-get install -qq \
-    build-essential \
+    # apps
     curl \
-    docker-compose \
     docker.io \
     fd-find \
     fish \
     fzf \
     git \
-    golang \
     htop \
     neovim \
-    nodejs \
-    npm \
-    python3 \
-    python3-dev \
-    python3-pip \
-    python3-setuptools \
     ripgrep \
     wget \
+    # langs
+    golang \
+    nodejs npm \
+    python3 python3-dev python3-pip python3-setuptools
+    rust \
+    # deps
+    build-essential \
+    pkg-config \
+    zlib1g-dev \
     --no-install-recommends
 
 # home
