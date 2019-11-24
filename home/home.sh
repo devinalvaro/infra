@@ -120,7 +120,7 @@ pip3 install --user 'python-language-server[rope,pycodestyle,pyflakes,yapf]'
 if [ ! -x "$(command -v rustup)" ]; then
     echo "==> Setting rust environment"
     export PATH="${HOME}/.cargo/bin:$PATH"
-    curl https://sh.rustup.rs -sSf | sh -s -- -y
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     rustup component add rls rust-analysis rust-src
     rustup component add rustfmt
 fi
