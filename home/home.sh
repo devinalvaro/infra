@@ -39,7 +39,7 @@ sudo apt-get install -qq \
 
 # home
 
-home_repo="git@gitlab.com:devinalvaro/home.git"
+home_repo="https://gitlab.com/devinalvaro/home.git"
 home_dir="${HOME}/$(basename ${home_repo})"
 if [ ! -d "${HOME}/.git" ]; then
     echo "==> Cloning home repository"
