@@ -9,7 +9,6 @@ password="${1-none}"
 sudo="sudo"
 if [ "${password}" != "none" ]; then
     sudo="echo ${password} | sudo -S"
-    sudo="eval $sudo"
 fi
 
 echo "==> Updating and installing packages"
