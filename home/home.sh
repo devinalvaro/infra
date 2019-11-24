@@ -43,8 +43,9 @@ home_repo="https://gitlab.com/devinalvaro/home.git"
 home_dir="${HOME}/$(basename ${home_repo})"
 if [ ! -d "${HOME}/.git" ]; then
     echo "==> Cloning home repository"
+    rm -rf "${home_dir}"
     git clone "${home_repo}" "${home_dir}"
-    cp -rp "${home_dir}/.[^.]"* ${HOME}
+    cp -rp "${home_dir}"/.[^.]* ${HOME}
     rm -rf "${home_dir}"
 fi
 
@@ -116,7 +117,7 @@ pip3 install --user 'python-language-server[rope,pycodestyle,pyflakes,yapf]'
 
 # rust
 
-if ! [ -x "$(command -v rustup)" ]; then
+if [ ! -x "$(command -v rustup)" ]; then
     echo "==> Setting rust environment"
     export PATH="${HOME}/.cargo/bin:$PATH"
     curl https://sh.rustup.rs -sSf | sh -s -- -y

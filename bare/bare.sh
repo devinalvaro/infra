@@ -8,12 +8,20 @@ if [ "${user}" == "none" ] || [ "${password}" == "none" ]; then
     exit
 fi
 
-echo "==> Creating user"
-useradd -m -r -p $(openssl passwd $password) -s $SHELL $user
+if [ ! "$(id -u ${user} 2> /dev/null)" ]; then
+    echo "==> Creating user"
+    useradd -m -r -p $(openssl passwd $password) -s $SHELL $user
+fi
 
-echo "==> Adding user to sudo"
-usermod -aG sudo $user
+if [ "$(groups ${user} | grep -q sudo)" ]; then
+    echo "==> Adding user to sudo"
+    usermod -aG sudo $user
+fi
 
-echo "==> Copying ssh keys to user"
-cp -r .ssh/ /home/$user/
-chown -R $user:$user /home/$user/.ssh/
+ssh_dir="$HOME/.ssh"
+user_ssh_dir="/home/$user/.ssh"
+if [ ! -d "${user_ssh_dir}" ]; then
+    echo "==> Copying ssh keys to user"
+    cp -r "${ssh_dir}" "${user_ssh_dir}"
+    chown -R $user:$user "${user_ssh_dir}"
+fi
