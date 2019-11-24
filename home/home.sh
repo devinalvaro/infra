@@ -4,7 +4,7 @@ set -eu
 
 export DEBIAN_FRONTEND=noninteractive
 
-upgrade_packages="${1}"
+upgrade_packages="${1-none}"
 
 if [ "${upgrade_packages}" == "upgrade" ]; then
     echo "==> Updating and upgrading packages"
