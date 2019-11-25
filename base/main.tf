@@ -9,6 +9,30 @@ resource "digitalocean_droplet" "default" {
   size      = var.droplet_size
   ssh_keys  = [data.digitalocean_ssh_key.default.fingerprint]
   user_data = data.template_cloudinit_config.init.rendered
+
+  provisioner "file" {
+    source      = "${path.module}/scripts/base.sh"
+    destination = "/tmp/base.sh"
+
+    connection {
+      user        = var.user
+      host        = digitalocean_droplet.default.ipv4_address
+      private_key = file(var.ssh_key_priv_path)
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/base.sh",
+      "/tmp/base.sh",
+    ]
+
+    connection {
+      user        = var.user
+      host        = digitalocean_droplet.default.ipv4_address
+      private_key = file(var.ssh_key_priv_path)
+    }
+  }
 }
 
 data "digitalocean_ssh_key" "default" {
