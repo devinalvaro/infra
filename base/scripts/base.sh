@@ -4,19 +4,12 @@ set -eu
 
 export DEBIAN_FRONTEND=noninteractive
 
-password="${1-none}"
-
-sudo="sudo"
-if [ "${password}" != "none" ]; then
-    sudo="echo ${password} | sudo -S"
-fi
-
 # ...
 
 # apt
 
 echo "==> Updating and installing packages"
-eval "${sudo}" apt-get update && eval "${sudo}" apt-get install -qq \
+sudo apt-get update && sudo apt-get install -qq \
     # apps
     curl \
     docker.io \
@@ -55,7 +48,7 @@ fi
 
 if [ ! "$(groups ${USER} | grep -w docker 2> /dev/null)" ]; then
     echo "==> Adding user to docker group"
-    eval "${sudo}" gpasswd -a "${USER}" docker
+    sudo gpasswd -a "${USER}" docker
 fi
 
 # fd
@@ -63,7 +56,7 @@ fi
 fd_bin="/usr/local/bin/fd"
 if [ ! -f "${fd_bin}" ]; then
     echo "==> Linking fdfind to fd"
-    eval "${sudo}" ln -sfn "$(which fdfind)" "${fd_bin}"
+    sudo ln -sfn "$(which fdfind)" "${fd_bin}"
 fi
 
 # fish
@@ -77,7 +70,7 @@ fi
 
 if [ $SHELL != "$(which fish)" ]; then
     echo " ==> Setting fish as the default shell"
-    eval "${sudo}" chsh -s "$(which fish)" "${USER}"
+    sudo chsh -s "$(which fish)" "${USER}"
 fi
 
 # nvim
@@ -86,7 +79,7 @@ vim_plug_file="${HOME}/.local/share/nvim/site/autoload/plug.vim"
 if [ ! -f "${vim_plug_file}" ]; then
     echo " ==> Installing nvim plugins"
     curl -fLo "${vim_plug_file}" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    nvim +'PlugInstall --sync' +qall
+    # nvim +'PlugInstall --sync' +qall
 fi
 
 nvim_ftplugin="${HOME}/.local/share/nvim/site/ftplugin"
@@ -108,7 +101,7 @@ pip3 install --user \
 
 echo "==> Setting go environment"
 export GOPATH="${HOME}/.go"
-nvim +GoInstallBinaries +qall
+# nvim +GoInstallBinaries +qall
 
 # python
 
