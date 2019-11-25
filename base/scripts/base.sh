@@ -10,7 +10,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 echo "==> Updating and installing packages"
 sudo apt-get update && sudo apt-get install -qq \
-    # apps
+    `# apps` \
     curl \
     docker.io \
     fd-find \
@@ -21,12 +21,11 @@ sudo apt-get update && sudo apt-get install -qq \
     neovim \
     ripgrep \
     wget \
-    # langs
+    `# langs` \
     golang \
     nodejs npm \
-    python3 python3-dev python3-pip python3-setuptools
-    rust \
-    # deps
+    python3 python3-dev python3-pip python3-setuptools \
+    `# deps` \
     build-essential \
     pkg-config \
     zlib1g-dev \
