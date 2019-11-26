@@ -7,5 +7,4 @@ users:
     groups: sudo
     shell: /bin/bash
 
-#cloud-config
 package_upgrade: true
