@@ -1,12 +1,8 @@
-digitalocean_token = ""
-
 droplet_name   = "home"
 droplet_image  = "ubuntu-19-10-x64"
 droplet_region = "sgp1"
 droplet_size   = "s-1vcpu-1gb"
 
-ssh_key_name      = "default"
-ssh_key_pub_path  = "~/.ssh/id_ed25519.pub"
-ssh_key_priv_path = "~/.ssh/id_ed25519"
+ssh_key_name = "default"
 
 user = "devin"
