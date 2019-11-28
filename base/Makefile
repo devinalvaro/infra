@@ -23,7 +23,7 @@ apply: $(TFVARS_FILE) $(SSH_KEY_PUB_PATH) $(SSH_KEY_PRIV_PATH)
 
 .PHONY: enter
 enter: $(SSH_KEY_PRIV_PATH)
-	@ssh -i $(SSH_KEY_PRIV_PATH) $(shell terraform output droplet_default_ipv4_address)
+	@ssh -i $(SSH_KEY_PRIV_PATH) $(shell terraform output droplet_base_ipv4_address)
 
 .PHONY: clean
 clean: $(TFVARS_FILE) $(SSH_KEY_PUB_PATH) $(SSH_KEY_PRIV_PATH)
