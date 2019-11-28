@@ -10,7 +10,7 @@ data "template_cloudinit_config" "init" {
 }
 
 data "template_file" "init" {
-  template = file("${path.module}/templates/init.tpl")
+  template = file("${path.root}/templates/init.tpl")
 
   vars = {
     user           = var.user

@@ -11,7 +11,7 @@ resource "digitalocean_droplet" "base" {
   user_data = data.template_cloudinit_config.init.rendered
 
   provisioner "file" {
-    source      = "${path.module}/scripts/base.sh"
+    source      = "${path.root}/scripts/base.sh"
     destination = "/tmp/base.sh"
 
     connection {
