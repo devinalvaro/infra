@@ -1,6 +1,3 @@
-# vars
-TFVARS_FILE = terraform.tfvars
-
 # keys
 SSH_KEY_NAME = id_ed25519
 SSH_KEY_DIR = .ssh
@@ -27,11 +24,11 @@ enter: $(SSH_KEY_PRIV_PATH)
 .PHONY: clean
 clean: $(SSH_KEY_PUB_PATH) $(SSH_KEY_PRIV_PATH)
 	@terraform destroy \
+		-target=module.digitalocean \
 		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)' \
 		-var 'ssh_key_pub_path=$(SSH_KEY_PUB_PATH)' \
 		-var 'ssh_key_priv_path=$(SSH_KEY_PRIV_PATH)'
 	@rm -rf $(SSH_KEY_DIR)
-	@rm $(TFVARS_FILE)
 
 $(SSH_KEY_DIR):
 	@mkdir -p $(SSH_KEY_DIR)
