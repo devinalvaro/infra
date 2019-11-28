@@ -1,6 +1,5 @@
 # vars
 TFVARS_FILE = terraform.tfvars
-TFVARS_EXAMPLE_FILE = terraform.tfvars.example
 
 # keys
 SSH_KEY_NAME = id_ed25519
@@ -15,7 +14,7 @@ DIGITALOCEAN_TOKEN = $(shell lpass show --notes 'DigitalOcean Access Tokens'/def
 all: apply
 
 .PHONY: apply
-apply: $(TFVARS_FILE) $(SSH_KEY_PUB_PATH) $(SSH_KEY_PRIV_PATH)
+apply: $(SSH_KEY_PUB_PATH) $(SSH_KEY_PRIV_PATH)
 	@terraform apply \
 		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)' \
 		-var 'ssh_key_pub_path=$(SSH_KEY_PUB_PATH)' \
@@ -26,16 +25,13 @@ enter: $(SSH_KEY_PRIV_PATH)
 	@ssh -i $(SSH_KEY_PRIV_PATH) $(shell terraform output droplet_base_ipv4_address)
 
 .PHONY: clean
-clean: $(TFVARS_FILE) $(SSH_KEY_PUB_PATH) $(SSH_KEY_PRIV_PATH)
+clean: $(SSH_KEY_PUB_PATH) $(SSH_KEY_PRIV_PATH)
 	@terraform destroy \
 		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)' \
 		-var 'ssh_key_pub_path=$(SSH_KEY_PUB_PATH)' \
 		-var 'ssh_key_priv_path=$(SSH_KEY_PRIV_PATH)'
 	@rm -rf $(SSH_KEY_DIR)
 	@rm $(TFVARS_FILE)
-
-$(TFVARS_FILE):
-	@cp $(TFVARS_EXAMPLE_FILE) $(TFVARS_FILE)
 
 $(SSH_KEY_DIR):
 	@mkdir -p $(SSH_KEY_DIR)
