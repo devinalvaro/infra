@@ -2,7 +2,7 @@ provider "digitalocean" {
   token = var.digitalocean_token
 }
 
-resource "digitalocean_droplet" "default" {
+resource "digitalocean_droplet" "base" {
   name      = var.droplet_name
   image     = var.droplet_image
   region    = var.droplet_region
@@ -16,7 +16,7 @@ resource "digitalocean_droplet" "default" {
 
     connection {
       user        = var.user
-      host        = digitalocean_droplet.default.ipv4_address
+      host        = digitalocean_droplet.base.ipv4_address
       private_key = file(var.ssh_key_priv_path)
     }
   }
@@ -29,7 +29,7 @@ resource "digitalocean_droplet" "default" {
 
     connection {
       user        = var.user
-      host        = digitalocean_droplet.default.ipv4_address
+      host        = digitalocean_droplet.base.ipv4_address
       private_key = file(var.ssh_key_priv_path)
     }
   }
