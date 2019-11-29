@@ -1,5 +1,5 @@
 module "digitalocean" {
-  source = "./digitalocean"
+  source = "./modules/digitalocean"
 
   digitalocean_token = var.digitalocean_token
 
@@ -7,7 +7,7 @@ module "digitalocean" {
 }
 
 module "docker" {
-  source = "./docker"
+  source = "./modules/docker"
 
   user = var.user
   hostname = module.digitalocean.droplet_base_ipv4_address
