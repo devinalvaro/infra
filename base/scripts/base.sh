@@ -12,7 +12,6 @@ echo "==> Updating and installing packages"
 sudo apt-get update && sudo apt-get install -qq \
     `# apps` \
     curl \
-    docker.io \
     fd-find \
     fish \
     fzf \
@@ -34,20 +33,13 @@ sudo apt-get update && sudo apt-get install -qq \
 # home
 
 home_repo="https://gitlab.com/devinalvaro/home.git"
-home_dir="${HOME}/$(basename ${home_repo})"
+home_dir="/tmp/$(basename ${home_repo})"
 if [ ! -d "${HOME}/.git" ]; then
     echo "==> Cloning home repository"
     rm -rf "${home_dir}"
     git clone "${home_repo}" "${home_dir}"
     cp -rp "${home_dir}"/.[^.]* ${HOME}
     rm -rf "${home_dir}"
-fi
-
-# docker
-
-if [ ! "$(groups ${USER} | grep -w docker 2> /dev/null)" ]; then
-    echo "==> Adding user to docker group"
-    sudo gpasswd -a "${USER}" docker
 fi
 
 # fd
@@ -75,16 +67,11 @@ fi
 # nvim
 
 vim_plug_file="${HOME}/.local/share/nvim/site/autoload/plug.vim"
+vim_plug_url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 if [ ! -f "${vim_plug_file}" ]; then
     echo " ==> Installing nvim plugins"
-    curl -fLo "${vim_plug_file}" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -fLo "${vim_plug_file}" --create-dirs "${vim_plug_url}"
     nvim +'PlugInstall --sync' +qall
-fi
-
-nvim_ftplugin="${HOME}/.local/share/nvim/site/ftplugin"
-if [ ! -d "${nvim_ftplugin}" ]; then
-    echo "==> Linking nvim/langs to nvim/site/ftplugin"
-    ln -sfn "${HOME}/.config/nvim/langs" "${nvim_ftplugin}"
 fi
 
 # pip
