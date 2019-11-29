@@ -2,7 +2,6 @@ module "digitalocean" {
   source = "./modules/digitalocean"
 
   digitalocean_token = var.digitalocean_token
-
   user = var.user
 }
 

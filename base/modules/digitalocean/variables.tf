@@ -16,5 +16,8 @@ variable "droplet_size" {
 variable "ssh_key_name" {
   default = "default"
 }
+variable "ssh_key_priv_path" {
+  default = "~/.ssh/id_ed25519"
+}
 
 variable "user" {}
