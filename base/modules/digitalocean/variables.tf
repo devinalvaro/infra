@@ -20,4 +20,6 @@ variable "ssh_key_priv_path" {
   default = "~/.ssh/id_ed25519"
 }
 
-variable "user" {}
+variable "user" {
+  default = "devin"
+}
