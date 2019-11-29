@@ -3,8 +3,10 @@ provider "docker" {
 }
 
 resource "docker_container" "base" {
-  name  = "base"
-  image = docker_image.home.latest
+  name    = "base"
+  image   = docker_image.home.latest
+  command = ["tail", "-f", "/dev/null"]
+  restart = "always"
 }
 
 resource "docker_image" "home" {
