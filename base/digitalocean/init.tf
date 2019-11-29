@@ -14,6 +14,6 @@ data "template_file" "init" {
 
   vars = {
     user           = var.user
-    ssh_public_key = digitalocean_ssh_key.default.public_key
+    ssh_public_key = data.digitalocean_ssh_key.default.public_key
   }
 }

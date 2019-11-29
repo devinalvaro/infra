@@ -16,7 +16,5 @@ variable "droplet_size" {
 variable "ssh_key_name" {
   default = "default"
 }
-variable "ssh_key_pub_path" {}
-variable "ssh_key_priv_path" {}
 
 variable "user" {}
