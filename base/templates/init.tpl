@@ -13,9 +13,9 @@ users:
       - docker
     shell: /bin/bash
 
-package_upgrade: true
+packages:
+  - docker.io
 
 runcmd:
-  - apt-get install docker.io
   - systemctl start docker
   - systemctl enable docker
