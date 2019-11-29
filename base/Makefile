@@ -17,7 +17,13 @@ apply-docker:
 		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)'
 
 .PHONY: clean
-clean: clean-digitalocean
+clean: clean-docker clean-digitalocean
+
+.PHONY: clean-docker
+clean-docker:
+	@terraform destroy \
+		-target=module.docker \
+		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)'
 
 .PHONY: clean-digitalocean
 clean-digitalocean:
