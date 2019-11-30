@@ -9,10 +9,11 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${user} && \
     chmod 0440 /etc/sudoers.d/${user}
 
-RUN useradd ${user}
+RUN useradd -m ${user}
 WORKDIR /home/${user}
 USER ${user}
 
 ENV USER ${user}
 COPY base.sh .
 RUN ./base.sh
+RUN rm base.sh
