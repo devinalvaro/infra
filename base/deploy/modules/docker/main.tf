@@ -1,5 +1,5 @@
 provider "docker" {
-  host = "ssh://${var.user}@${var.hostname}:${var.port}"
+  host = "ssh://${var.user}@${var.hostname}:${var.ssh_port}"
 }
 
 resource "docker_container" "base" {
@@ -12,8 +12,8 @@ resource "docker_container" "base" {
   restart = "always"
 
   ports {
-    internal = 22
-    external = 2222
+    internal = var.ssh_port
+    external = var.container_ssh_port
   }
 }
 
