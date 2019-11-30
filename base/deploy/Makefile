@@ -16,21 +16,21 @@ apply-docker:
 		-target=module.docker \
 		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)'
 
-.PHONY: clean
-clean: clean-docker clean-digitalocean
+.PHONY: destroy
+destroy: destroy-docker destroy-digitalocean
 
-.PHONY: clean-docker
-clean-docker:
+.PHONY: destroy-docker
+destroy-docker:
 	@terraform destroy \
 		-target=module.docker \
 		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)'
 
-.PHONY: clean-digitalocean
-clean-digitalocean:
+.PHONY: destroy-digitalocean
+destroy-digitalocean:
 	@terraform destroy \
 		-target=module.digitalocean \
 		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)'
 
 .PHONY: enter
 enter:
-	@ssh $(shell terraform output droplet_base_ipv4_address)
+	@ssh devin@$(shell terraform output droplet_base_ipv4_address)
