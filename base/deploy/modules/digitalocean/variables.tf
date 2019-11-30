@@ -4,7 +4,7 @@ variable "droplet_name" {
   default = "base"
 }
 variable "droplet_image" {
-  default = "ubuntu-19-04-x64"
+  default = "ubuntu-19-10-x64"
 }
 variable "droplet_region" {
   default = "sgp1"
