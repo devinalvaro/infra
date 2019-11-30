@@ -33,4 +33,4 @@ destroy-digitalocean:
 
 .PHONY: enter
 enter:
-	@ssh devin@$(shell terraform output droplet_base_ipv4_address)
+	@ssh -p 2222 devin@$(shell terraform output droplet_base_ipv4_address)

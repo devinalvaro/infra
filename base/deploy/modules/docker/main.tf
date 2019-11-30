@@ -3,10 +3,18 @@ provider "docker" {
 }
 
 resource "docker_container" "base" {
-  name    = "base"
-  image   = docker_image.base.latest
-  command = ["tail", "-f", "/dev/null"]
+  name  = "base"
+  image = docker_image.base.latest
+  command = [
+    "bash", "-c",
+    "sudo service ssh start && tail -f /dev/null",
+  ]
   restart = "always"
+
+  ports {
+    internal = 22
+    external = 2222
+  }
 }
 
 resource "docker_image" "base" {

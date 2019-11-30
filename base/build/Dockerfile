@@ -4,6 +4,7 @@ ARG user=devin
 ARG ssh_pub
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+        ssh \
         sudo \
         --no-install-recommends
 
@@ -17,7 +18,7 @@ WORKDIR /home/${user}
 ENV USER ${user}
 
 RUN mkdir -p .ssh
-RUN echo ${ssh_pub} > .ssh/id_ed25519.pub
+RUN echo ${ssh_pub} > .ssh/authorized_keys
 
 COPY base.sh .
 RUN ./base.sh
