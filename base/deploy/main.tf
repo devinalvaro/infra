@@ -8,5 +8,4 @@ module "docker" {
   source = "./modules/docker"
 
   hostname = module.digitalocean.droplet_base_ipv4_address
-  port     = "22"
 }

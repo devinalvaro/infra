@@ -2,4 +2,6 @@ variable "user" {
   default = "devin"
 }
 variable "hostname" {}
-variable "port" {}
+variable "port" {
+  default = "22"
+}
