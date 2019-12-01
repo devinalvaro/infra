@@ -1,8 +1,11 @@
-# addresses
-DROPLET_ADDRESS = $(shell terraform output droplet_base_ipv4_address)
+# defaults
+USER = devin
 
-# tokens
+# secrets
 DIGITALOCEAN_TOKEN = $(shell lpass show --notes 'DigitalOcean Access Tokens'/default)
+
+# outputs
+DROPLET_ADDRESS = $(shell terraform output droplet_base_ipv4_address)
 
 .PHONY: apply
 apply: apply-digitalocean apply-docker
@@ -39,8 +42,8 @@ enter: enter-docker
 
 .PHONY: enter-docker
 enter-docker:
-	@docker -H ssh://devin@$(DROPLET_ADDRESS) exec -it base fish
+	@docker -H ssh://$(USER)@$(DROPLET_ADDRESS) exec -it base fish
 
 .PHONY: enter-digitalocean
 enter-digitalocean:
-	@ssh devin@$(DROPLET_ADDRESS)
+	@ssh $(USER)@$(DROPLET_ADDRESS)
