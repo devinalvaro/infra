@@ -1,3 +1,6 @@
+# addresses
+DROPLET_ADDRESS = $(shell terraform output droplet_base_ipv4_address)
+
 # tokens
 DIGITALOCEAN_TOKEN = $(shell lpass show --notes 'DigitalOcean Access Tokens'/default)
 
@@ -33,4 +36,4 @@ destroy-digitalocean:
 
 .PHONY: enter
 enter:
-	@ssh -p 2222 devin@$(shell terraform output droplet_base_ipv4_address)
+	@docker -H ssh://devin@$(DROPLET_ADDRESS) exec -it base fish

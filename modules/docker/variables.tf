@@ -2,10 +2,14 @@ variable "user" {
   default = "devin"
 }
 variable "hostname" {}
-
-variable "ssh_port" {
+variable "port" {
   default = "22"
 }
-variable "container_ssh_port" {
-  default = "2222"
+
+variable "container_name" {
+  default = "base"
+}
+
+variable "image_name" {
+  default = "devinalvaro/base"
 }
