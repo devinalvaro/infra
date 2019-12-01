@@ -4,10 +4,10 @@ set -eu
 
 # ...
 
-# apt
+# dnf
 
 echo "==> Upgrading and installing packages"
-sudo apt update -qq -y && sudo apt upgrade -qq -y && sudo apt install -qq -y \
+sudo dnf upgrade -q -y && sudo dnf install -q -y \
     `# apps` \
     fd-find \
     fish \
@@ -19,15 +19,11 @@ sudo apt update -qq -y && sudo apt upgrade -qq -y && sudo apt install -qq -y \
     wget \
     `# langs` \
     golang \
-    nodejs npm \
-    python3 python3-dev python3-pip python3-setuptools \
-    `# essentials` \
-    build-essential \
-    curl \
+    nodejs \
+    python3 python3-devel \
     `# libs` \
     pkg-config \
-    zlib1g-dev \
-    --no-install-recommends
+    zlib-devel
 
 # ...
 

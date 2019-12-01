@@ -16,14 +16,6 @@ if [ ! -d "${HOME}/.git" ]; then
     rm -rf "${home_dir}"
 fi
 
-# fd
-
-fd_bin="/usr/local/bin/fd"
-if [ ! -f "${fd_bin}" ]; then
-    echo "==> Linking fdfind to fd"
-    sudo ln -sfn "$(which fdfind)" "${fd_bin}"
-fi
-
 # fish
 
 fisher_file="${HOME}/.config/fish/functions/fisher.fish"

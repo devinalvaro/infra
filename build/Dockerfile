@@ -1,12 +1,12 @@
-FROM ubuntu:19.10
+FROM fedora:31
 
 ARG user=devin
 ARG ssh_pub
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-        ssh \
-        sudo \
-        --no-install-recommends
+RUN dnf install -q -y \
+        @development-tools \
+        @infrastructure-server-environment \
+        util-linux-user
 
 RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${user} && \
     chmod 0440 /etc/sudoers.d/${user}
@@ -20,6 +20,6 @@ ENV USER ${user}
 RUN mkdir -p .ssh
 RUN echo ${ssh_pub} > .ssh/authorized_keys
 
-COPY ubuntu.sh base.sh .
-RUN ./ubuntu.sh && ./base.sh
-RUN rm ubuntu.sh base.sh
+COPY fedora.sh base.sh ./
+RUN ./fedora.sh && ./base.sh
+RUN rm fedora.sh base.sh
