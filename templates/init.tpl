@@ -13,6 +13,8 @@ users:
       - docker
     shell: /bin/bash
 
+package_upgrade: true
+
 packages:
   - docker.io
 
