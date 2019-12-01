@@ -35,5 +35,12 @@ destroy-digitalocean:
 		-var 'digitalocean_token=$(DIGITALOCEAN_TOKEN)'
 
 .PHONY: enter
-enter:
+enter: enter-docker
+
+.PHONY: enter-docker
+enter-docker:
 	@docker -H ssh://devin@$(DROPLET_ADDRESS) exec -it base fish
+
+.PHONY: enter-digitalocean
+enter-digitalocean:
+	@ssh devin@$(DROPLET_ADDRESS)
