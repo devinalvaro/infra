@@ -2,33 +2,7 @@
 
 set -eu
 
-export DEBIAN_FRONTEND=noninteractive
-
 # ...
-
-# apt
-
-echo "==> Updating and installing packages"
-sudo apt-get update && sudo apt-get install -qq \
-    `# apps` \
-    curl \
-    fd-find \
-    fish \
-    fzf \
-    git \
-    htop \
-    neovim \
-    ripgrep \
-    wget \
-    `# langs` \
-    golang \
-    nodejs npm \
-    python3 python3-dev python3-pip python3-setuptools \
-    `# deps` \
-    build-essential \
-    pkg-config \
-    zlib1g-dev \
-    --no-install-recommends
 
 # home
 

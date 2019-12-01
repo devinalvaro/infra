@@ -20,6 +20,6 @@ ENV USER ${user}
 RUN mkdir -p .ssh
 RUN echo ${ssh_pub} > .ssh/authorized_keys
 
-COPY base.sh .
-RUN ./base.sh
-RUN rm base.sh
+COPY ubuntu.sh base.sh .
+RUN ./ubuntu.sh && ./base.sh
+RUN rm ubuntu.sh base.sh
