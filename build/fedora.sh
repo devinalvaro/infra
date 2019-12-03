@@ -17,6 +17,7 @@ sudo dnf upgrade -q -y && sudo dnf install -q -y \
     neovim \
     ripgrep \
     wget \
+    xclip \
     `# langs` \
     golang \
     nodejs \
