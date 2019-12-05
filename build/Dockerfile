@@ -3,9 +3,27 @@ FROM fedora:31
 ARG user=devin
 
 RUN dnf install -q -y \
+        # essentials
         @development-tools \
         util-linux-user \
-        which
+        which \
+        # apps
+        fd-find \
+        fish \
+        fzf \
+        git \
+        htop \
+        neovim \
+        ripgrep \
+        wget \
+        xclip \
+        # langs
+        golang \
+        nodejs \
+        python python-devel \
+        # libs
+        pkg-config \
+        zlib-devel
 
 RUN echo "${user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${user} && \
     chmod 0440 /etc/sudoers.d/${user}
@@ -16,6 +34,6 @@ USER ${user}
 WORKDIR /home/${user}
 ENV USER ${user}
 
-COPY fedora.sh base.sh ./
-RUN ./fedora.sh && ./base.sh
-RUN rm fedora.sh base.sh
+COPY base.sh ./
+RUN ./base.sh
+RUN rm base.sh
