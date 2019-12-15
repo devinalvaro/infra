@@ -55,11 +55,6 @@ echo "==> Setting go environment"
 export GOPATH="${HOME}/.go"
 # nvim +GoInstallBinaries +qall
 
-# python
-
-echo "==> Setting python environment"
-pip3 install --user 'python-language-server[rope,pycodestyle,pyflakes,yapf]'
-
 # rust
 
 if [ ! -x "$(command -v rustup)" ]; then
