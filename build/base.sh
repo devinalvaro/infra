@@ -16,6 +16,40 @@ if [ ! -d "${HOME}/.git" ]; then
     rm -rf "${home_dir}"
 fi
 
+# ...
+
+# clojure
+
+clojure_file="linux-install-1.10.1.492.sh"
+clojure_url="https://download.clojure.org/install/${clojure_file}"
+if [ ! -x "$(command -v clojure)" ]; then
+    echo "==> Installing clojure"
+    wget "${clojure_url}"
+    chmod +x "${clojure_file}"
+    sudo "./${clojure_file}"
+    rm "${clojure_file}"
+fi
+
+lein_dir="${HOME}/.lein/bin"
+lein_url="https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein"
+if [ ! -x "$(command -v lein)" ]; then
+    echo "==> Installing lein"
+    wget -P "${lein_dir}" "${lein_url}"
+    chmod +x "${lein_dir}/lein"
+fi
+
+# rust
+
+if [ ! -x "$(command -v rustup)" ]; then
+    echo "==> Installing rust"
+    export PATH="${HOME}/.cargo/bin:$PATH"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    rustup component add rls rust-analysis rust-src
+    rustup component add rustfmt
+fi
+
+# ...
+
 # fish
 
 fisher_file="${HOME}/.config/fish/functions/fisher.fish"
@@ -46,24 +80,6 @@ echo "==> Installing pip packages"
 export PYTHONUSERBASE="${HOME}/.pip"
 pip3 install --user \
     neovim-remote
-
-# ...
-
-# go
-
-echo "==> Setting go environment"
-export GOPATH="${HOME}/.go"
-# nvim +GoInstallBinaries +qall
-
-# rust
-
-if [ ! -x "$(command -v rustup)" ]; then
-    echo "==> Setting rust environment"
-    export PATH="${HOME}/.cargo/bin:$PATH"
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    rustup component add rls rust-analysis rust-src
-    rustup component add rustfmt
-fi
 
 # ...
 

@@ -19,8 +19,9 @@ RUN dnf install -q -y \
         xclip \
         # langs
         golang \
+        java-1.8.0-openjdk \
         nodejs \
-        python python-devel \
+        python-devel \
         # libs
         pkg-config \
         zlib-devel
