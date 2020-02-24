@@ -18,26 +18,6 @@ fi
 
 # ...
 
-# clojure
-
-clojure_file="linux-install-1.10.1.492.sh"
-clojure_url="https://download.clojure.org/install/${clojure_file}"
-if [ ! -x "$(command -v clojure)" ]; then
-    echo "==> Installing clojure"
-    wget "${clojure_url}"
-    chmod +x "${clojure_file}"
-    sudo "./${clojure_file}"
-    rm "${clojure_file}"
-fi
-
-lein_dir="${HOME}/.lein/bin"
-lein_url="https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein"
-if [ ! -x "$(command -v lein)" ]; then
-    echo "==> Installing lein"
-    wget -P "${lein_dir}" "${lein_url}"
-    chmod +x "${lein_dir}/lein"
-fi
-
 # rust
 
 if [ ! -x "$(command -v rustup)" ]; then
