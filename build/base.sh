@@ -22,7 +22,7 @@ fi
 
 if [ ! -x "$(command -v rustup)" ]; then
     echo "==> Installing rust"
-    export PATH="${HOME}/.cargo/bin:$PATH"
+    export PATH="${HOME}/.cargo/bin:${PATH}"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     rustup component add rustfmt
 fi
@@ -30,6 +30,11 @@ fi
 # ...
 
 # fish
+
+if [ ! -x "$(command -v starship)" ]; then
+    echo "==> Installing starship"
+    curl -fsSL https://starship.rs/install.sh | sudo bash -s -- -y
+fi
 
 fisher_file="${HOME}/.config/fish/functions/fisher.fish"
 if [ ! -f "${fisher_file}" ]; then
