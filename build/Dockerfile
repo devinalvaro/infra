@@ -8,6 +8,7 @@ RUN dnf install -q -y \
         util-linux-user \
         which \
         # apps
+        exa \
         fd-find \
         fish \
         fzf \
