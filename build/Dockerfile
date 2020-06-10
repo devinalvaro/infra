@@ -19,7 +19,6 @@ RUN dnf install -q -y \
         wget \
         xclip \
         # langs
-        golang \
         nodejs \
         python-devel \
         # libs

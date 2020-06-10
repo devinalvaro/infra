@@ -18,6 +18,20 @@ fi
 
 # ...
 
+# go
+
+go_ver="1.12.17"
+go_tar="go${go_ver}.linux-amd64.tar.gz"
+go_url="https://dl.google.com/go/${go_tar}"
+goroot="/usr/local/go"
+if [ ! -x "$(command -v go)" ]; then
+    echo "==> Installing go"
+    wget -O "/tmp/${go_tar}" "${go_url}"
+    tar xzf "/tmp/${go_tar}"
+    sudo mv "./go" "${goroot}"
+    sudo ln -s "${goroot}/bin/"* "/usr/local/bin/"
+fi
+
 # rust
 
 if [ ! -x "$(command -v rustup)" ]; then
