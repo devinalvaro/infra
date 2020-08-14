@@ -5,6 +5,7 @@ ARG user=devin
 RUN dnf install -q -y \
         # essentials
         @development-tools \
+        findutils \
         util-linux-user \
         which \
         # apps
