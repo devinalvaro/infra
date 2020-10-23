@@ -34,9 +34,9 @@ fi
 
 # rust
 
+export PATH="${HOME}/.cargo/bin:${PATH}"
 if [ ! -x "$(command -v rustup)" ]; then
     echo "==> Installing rust"
-    export PATH="${HOME}/.cargo/bin:${PATH}"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     rustup component add rustfmt
 fi
