@@ -36,9 +36,17 @@ fi
 
 export PATH="${HOME}/.cargo/bin:${PATH}"
 if [ ! -x "$(command -v rustup)" ]; then
-    echo "==> Installing rust"
+    echo "==> Installing rustup"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     rustup component add rustfmt
+fi
+
+rust_analyzer_file="${HOME}/.local/bin/rust-analyzer"
+if [ ! -x "$(command -v rust-analyzer)" ]; then
+    echo "==> Installing rust-analyzer"
+    curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -o "${rust_analyzer_file}"
+    chmod +x "${rust_analyzer_file}"
+    rustup component add rust-src
 fi
 
 # ...
