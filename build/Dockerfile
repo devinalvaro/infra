@@ -2,13 +2,16 @@ FROM fedora:33
 
 ARG user=devin
 
+RUN dnf update -q -y
+
 RUN dnf install -q -y \
-        # essentials
+        ## essentials
         @development-tools \
         findutils \
         util-linux-user \
         which \
-        # apps
+        ## apps
+        bat \
         exa \
         fd-find \
         fish \
@@ -19,10 +22,10 @@ RUN dnf install -q -y \
         ripgrep \
         wget \
         xclip \
-        # langs
+        ## langs
         nodejs \
         python-devel \
-        # libs
+        ## libs
         pkg-config \
         zlib-devel
 
