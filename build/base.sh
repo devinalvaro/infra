@@ -41,14 +41,6 @@ if [ ! -x "$(command -v rustup)" ]; then
     rustup component add rustfmt
 fi
 
-rust_analyzer_file="${HOME}/.local/bin/rust-analyzer"
-if [ ! -x "$(command -v rust-analyzer)" ]; then
-    echo "==> Installing rust-analyzer"
-    curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -o "${rust_analyzer_file}"
-    chmod +x "${rust_analyzer_file}"
-    rustup component add rust-src
-fi
-
 # ...
 
 # fish
