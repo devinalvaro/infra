@@ -32,13 +32,23 @@ if [ ! -x "$(command -v go)" ]; then
     sudo ln -s "${goroot}/bin/"* "/usr/local/bin/"
 fi
 
+# haskell
+
+ghc_ver="8.10.3"
+ghcup_bin="${HOME}/.ghcup/bin/ghcup"
+if [ ! -x "$(command -v ghcup)" ]; then
+    echo "==> Installing ghcup"
+    curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | BOOTSTRAP_HASKELL_NONINTERACTIVE=1 BOOTSTRAP_HASKELL_GHC_VERSION="${ghc_ver}" sh
+    "${ghcup_bin}" install hls
+fi
+
 # rust
 
-export PATH="${HOME}/.cargo/bin:${PATH}"
+rustup_bin="${HOME}/.cargo/bin/rustup"
 if [ ! -x "$(command -v rustup)" ]; then
     echo "==> Installing rustup"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    rustup component add rustfmt
+    "${rustup_bin}" component add rustfmt
 fi
 
 # ...
