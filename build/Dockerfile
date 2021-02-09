@@ -17,7 +17,6 @@ RUN dnf install -q -y \
         fish \
         fzf \
         git \
-        htop \
         neovim \
         ripgrep \
         wget \
