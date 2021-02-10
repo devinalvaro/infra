@@ -2,9 +2,7 @@ FROM fedora:33
 
 ARG user=devin
 
-RUN dnf update -q -y
-
-RUN dnf install -q -y \
+RUN dnf update -q -y && dnf install -q -y \
         ## essentials
         @development-tools \
         findutils \
@@ -22,8 +20,8 @@ RUN dnf install -q -y \
         wget \
         xclip \
         ## langs
+        elixir erlang \
         nodejs \
-        python-devel \
         ## libs
         pkg-config \
         zlib-devel
