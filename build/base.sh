@@ -4,20 +4,6 @@ set -eu
 
 # ...
 
-# home
-
-home_repo="https://gitlab.com/devinalvaro/home.git"
-home_dir="/tmp/$(basename ${home_repo})"
-if [ ! -d "${HOME}/.git" ]; then
-    echo "==> Cloning home repository"
-    rm -rf "${home_dir}"
-    git clone "${home_repo}" "${home_dir}"
-    cp -rp "${home_dir}"/.[^.]* ${HOME}
-    rm -rf "${home_dir}"
-fi
-
-# ...
-
 # go
 
 go_ver="1.12.17"
@@ -62,14 +48,9 @@ fi
 
 fisher_file="${HOME}/.config/fish/functions/fisher.fish"
 if [ ! -f "${fisher_file}" ]; then
-    echo " ==> Installing fish plugins"
+    echo " ==> Installing fisher"
     curl https://git.io/fisher --create-dirs -sLo "${fisher_file}"
-    fish -c fisher
-fi
-
-if [ $SHELL != "$(which fish)" ]; then
-    echo " ==> Setting fish as the default shell"
-    sudo chsh -s "$(which fish)" "${USER}"
+    fish -c fisher install franciscolourenco/done
 fi
 
 # nvim
@@ -77,19 +58,15 @@ fi
 vim_plug_file="${HOME}/.local/share/nvim/site/autoload/plug.vim"
 vim_plug_url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 if [ ! -f "${vim_plug_file}" ]; then
-    echo " ==> Installing nvim plugins"
+    echo " ==> Installing vim-plug"
     curl -fLo "${vim_plug_file}" --create-dirs "${vim_plug_url}"
-    nvim +'PlugInstall --sync' +qall
 fi
 
-# pip
-
-echo "==> Installing pip packages"
-export PYTHONUSERBASE="${HOME}/.pip"
-pip3 install --user \
-    neovim-remote
+if [ ! -x "$(command -v nvr)" ]; then
+    echo "==> Installing neovim-remote"
+    PYTHONUSERBASE="${HOME}/.pip" pip3 install --user neovim-remote
+fi
 
 # ...
 
-echo ""
 echo "==> Done!"
